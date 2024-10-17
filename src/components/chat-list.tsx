@@ -1,16 +1,25 @@
 import React from 'react'
 import type { UIState } from "@ai-rsc/app/actions";
+import { UserMessage, BotMessage } from "@/components/llm-crypto/message";
 
 const ChatList = ({ messages }: { messages: UIState[number][] }) => {
   return (
     <div className="relative mx-auto max-w-2xl px-4">
       <div className="flex flex-col gap-3">
         {messages.map((message, index) => (
-          <div key={index}>{message}</div>
+          message.role === 'user' ? (
+            <UserMessage key={index}>
+              <p>{message.content}</p>
+            </UserMessage>
+          ) : (
+            <BotMessage key={index}>
+              <p>{message.content}</p>
+            </BotMessage>
+          )
         ))}
       </div>
     </div>
   )
 }
 
-export default ChatList   
+export default ChatList
