@@ -3,13 +3,19 @@ import { z } from "zod";
 
 export const env = createEnv({
     server: {
-      OPEN_AI_API_KEY: z.string().min(1),
+      OPENAI_API_KEY: z.string(),
+      BINANCE_API_KEY: z.string(),
+      BINANCE_API_SECRET: z.string(),
+      CMC_API_KEY: z.string()
     },
     client: {
       NEXT_PUBLIC_EXAMPLE: z.string()
     },
     runtimeEnv: {
-      OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
+      OPENAI_API_KEY: process.env.OPENAI_API_KEY,
       NEXT_PUBLIC_EXAMPLE: process.env.NEXT_PUBLIC_EXAMPLE,
+      BINANCE_API_KEY: process.env.BINANCE_API_KEY,
+      BINANCE_API_SECRET: process.env.BINANCE_API_SECRET,
+      CMC_API_KEY: process.env.CMC_API_KEY,
     },
   });
