@@ -1,6 +1,7 @@
 import React from 'react'
-import type { UIState } from "@ai-rsc/app/actions";
+// import type { UIState } from "@ai-rsc/app/actions";
 import { UserMessage, BotMessage } from "@/components/llm-crypto/message";
+import { UIState } from '@/app/actions';
 
 const ChatList = ({ messages }: { messages: UIState[number][] }) => {
   return (

@@ -12,6 +12,7 @@ import { UserMessage } from "@/components/llm-crypto/message";
 import ChatList from "@/components/chat-list";
 import { ChatScrollAnchor } from "@/components/chat-scroll-anchor";
 import { ChatInputs } from "@/lib/chat-schema";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Page = () => {
   const [messages, setMessages] = useUIState<typeof AI>();
@@ -72,6 +73,9 @@ const Page = () => {
 
   return (
     <main>
+      <div className="fixed top-4 right-4 z-50">
+        <ModeToggle />
+      </div>
       <div className="pb-[200px] pt-4 md:pt-10">
         <ChatList messages={messages} />
         <ChatScrollAnchor />
