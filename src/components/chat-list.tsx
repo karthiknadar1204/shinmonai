@@ -14,7 +14,7 @@ const ChatList = ({ messages }: { messages: UIState[number][] }) => {
             </UserMessage>
           ) : (
             <BotMessage key={index}>
-              <p>{message.content}</p>
+              {message.display || <p>{message.content}</p>}
             </BotMessage>
           )
         ))}
