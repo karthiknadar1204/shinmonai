@@ -3,7 +3,7 @@ import { BotCard, BotMessage } from "@/components/llm-crypto/message";
 import { openai } from "@ai-sdk/openai";
 import type { CoreMessage, ToolInvocation } from "ai";
 import { createAI, getMutableAIState, streamUI } from "ai/rsc";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Loader2 } from "lucide-react";
 import { PriceSkeleton } from "@/components/llm-crypto/price-skeleton";
 import { z } from "zod";
@@ -235,6 +235,9 @@ export type AIState = Array<{
   content: string; // This is the content of the message that we pass back to client as a string
 }>;
 
+
+
+// AIState includes the "system" role because it needs to send the complete context to the AI model, including system instructions
 export type UIState = Array<{
   id: number;
   role: "user" | "assistant";
@@ -242,6 +245,10 @@ export type UIState = Array<{
   display?: ReactNode;
   toolInvocations?: ToolInvocation[];
 }>;
+// UIState only includes "user" and "assistant" roles because these are the only messages that need to be displayed in the UI. System messages are behind-the-scenes instructions that users don't need to see.
+
+
+
 // A tool invocation is basically when the AI is asking to use a specific tool or function to get something done. Think of it like calling for
 // help to complete a task.
 
@@ -249,7 +256,7 @@ export type UIState = Array<{
 // Tool Call: The AI says, "I need to know the current price of Bitcoin." This is the tool invocation or the request to use a tool that can get the price.
 // Tool Result: After the tool does its work, it replies, "The price of Bitcoin is $30,000." This is the result of the tool invocation.
 
-// Create the AI provider with the initial states and allowed actions
+// Create the AI provider with the initial states and allowed actions---> This is created first and then we pass the actions to it.
 export const AI = createAI({
   initialAIState: [] as AIState,
   initialUIState: [] as UIState,
@@ -257,3 +264,8 @@ export const AI = createAI({
     sendMessage,
   },
 });
+
+
+//  "user": Messages from the user
+// "assistant": Responses from the AI
+// "system": System prompts/instructions that guide the AI's behavior

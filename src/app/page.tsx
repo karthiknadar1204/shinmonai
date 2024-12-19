@@ -11,7 +11,7 @@ import { AI } from "./actions";
 import { UserMessage } from "@/components/llm-crypto/message";
 import ChatList from "@/components/chat-list";
 import { ChatScrollAnchor } from "@/components/chat-scroll-anchor";
-import { ChatInputs } from "@/lib/chat-schema";
+import type { ChatInputs } from "@/lib/chat-schema";
 import { ModeToggle } from "@/components/mode-toggle";
 
 const Page = () => {
